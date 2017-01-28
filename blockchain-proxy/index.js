@@ -45,7 +45,7 @@ app.get('/accounts/:account/provideSlot', (req, res) => {
         req.query.descr,
         +req.query.xCoord,
         +req.query.yCoord,
-        +req.query.bluetoothName,
+        req.query.bluetoothName,
          { gas:4000000 }
     , (error, response) => {
         if (error) throw error;
