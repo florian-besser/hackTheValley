@@ -37,7 +37,7 @@ export class HomePage {
   openGate(){
     if(this.conntectedToGate) {
       BLE
-        .writeWithoutResponse(this.deviceId, this.service, this.characteristic, this.stringToBytes("OPEN;"))
+        .writeWithoutResponse(this.deviceId, this.service, this.characteristic, this.stringToBytes(`${this.blockchain.address};`))
         .catch((error) => alert("write error: " + error));
     } else {
       alert("Not connected");

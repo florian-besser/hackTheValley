@@ -15,9 +15,13 @@ export class ParkingSpaceInfo {
 @Injectable()
 export class Blockchain {
 
-  address = '0xf88e609aac9ad4039cddfab35fbf3fd750430097';
+  address = '';
 
   constructor(public client: HttpClient) {  
+  }
+
+  getAddress(){
+    this.client.gett('/accounts/defaultAccount').then(v => this.address = v.text());
   }
 
   getParkingSpaces(): Promise<ParkingSpaceInfo[]> {

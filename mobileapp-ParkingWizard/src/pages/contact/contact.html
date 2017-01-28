@@ -8,10 +8,12 @@
 
 <ion-content>
   <ion-list>
-    <ion-list-header>Follow us on Twitter</ion-list-header>
+    <ion-list-header>Click Set before starting off!</ion-list-header>
     <ion-item>
-      <ion-icon name="ionic" item-left></ion-icon>
-      @ionicframework
+      <ion-input [(ngModel)]="url"></ion-input>
+    </ion-item>
+    <ion-item>
+      <button ion-button (click)="setUrl()">Set</button>
     </ion-item>
   </ion-list>
 </ion-content>
