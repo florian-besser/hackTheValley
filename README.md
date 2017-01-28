@@ -38,3 +38,24 @@ theContract.hasAccess(1337, "0x4936c7d5785d9189a5d1af838c3fadcd0db1da3c");
 # Debug transactions
 
 eth.getTransactionReceipt("0xb0b202a37cc995d047ae7750f191979e39c05ddc53386e4d1a705bfd867003bf")
+
+# Crypto challenges (Sig)
+
+var msg = "foobar";
+
+var msgHash = web3.sha3(msg);
+
+//var sig = web3.personal.sign(msgHash, web3.eth.defaultAccount);
+var sig = web3.eth.sign(web3.eth.defaultAccount, msgHash);
+
+Send sig over the net.
+
+# Crypto challenges (Verify)
+
+var r = sig.slice(0, 66)
+var s = '0x' + sig.slice(66, 130)
+var v = '0x' + sig.slice(130)
+v = web3.toDecimal(v)
+
+web3.eth.defaultAccount ?= auth.verify.call(msgHash, v, r, s)
+//web3.eth.defaultAccount ?= web3.personal.ecrecover(msgHash, v, r, s);
