@@ -1,0 +1,15 @@
+{
+  "name": "blockchain-proxy",
+  "version": "1.0.0-alpha.1",
+  "description": "Parking Blockchain Proxy",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Zühlke Blockchain Enthusiasts",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "express": "^4.14.0",
+    "web3": "^0.18.2"
+  }
+}
