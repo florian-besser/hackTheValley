@@ -93,13 +93,18 @@ contract Parking {
         }
     }
 
-    //TODO: Verify that enough ETHER was submitted for the entire duration (durationInMinutes * providedSlotsBySlotId[slotId].pricePerMinute)
     function reservateSlot(uint32 slotId, uint32 durationInMinutes) payable returns (bool success) {
         if(!providedSlotsBySlotId[slotId].available){
             return false;
         }
+
+        ProvidedSlot ps = providedSlotsBySlotId[slotId];
     
-        providedSlotsBySlotId[slotId].available = false; //flag it as reservated
+        if (msg.value < durationInMinutes * ps.pricePerMinute) {
+            //TODO: Verify that enough ETHER was submitted for the entire duration
+            //return false;
+        }
+        ps.available = false; //flag it as reservated
 
         reservatedSlotsByDriverAddr[msg.sender].driver = msg.sender;
         reservatedSlotsByDriverAddr[msg.sender].slotId = slotId;

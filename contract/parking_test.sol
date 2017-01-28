@@ -52,9 +52,18 @@ contract ParkingTest is Test {
     }
 
     function testReserveSlotAccess() logs_gas() {
-        parking.provideSlot(1, 123, "desc", 0, 0, "bluetoothName");
-        parking.reservateSlot(1, 60);
+        parking.provideSlot(1, 10, "desc", 0, 0, "bluetoothName");
+        parking.reservateSlot.value(600).gas(400000)(1,60);
         assertEq( parking.hasAccess(1, 0x123), false);
         assertEq( parking.hasAccess(1, address(this)), true);
+    }
+
+    function testReserveSlotAccessWithInsufficientFunds() logs_gas() {
+        parking.provideSlot(1, 10, "desc", 0, 0, "bluetoothName");
+        //Only send 1 wei, must be at least (10*60) wei
+        parking.reservateSlot.value(1).gas(400000)(1,60);
+        
+        //TODO: Verify that enough ETHER was submitted for the entire duration
+        //assertEq( parking.hasAccess(1, address(this)), false);
     }
 }
