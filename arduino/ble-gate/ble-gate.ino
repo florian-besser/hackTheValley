@@ -40,11 +40,6 @@ void loop() {
     Serial.println("Bluetooth data available");
     while(bluetooth.available()) {
       String command = bluetooth.readStringUntil(';');
-      if(command.startsWith("OPEN")) {
-        openGate();
-        delay(5000);
-        closeGate();
-      }
       Serial.println("Command: ");
       Serial.println(command);
     }
