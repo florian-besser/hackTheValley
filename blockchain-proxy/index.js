@@ -10,6 +10,12 @@ var contract = web3.eth.contract(contractAbi);
 var theContract = contract.at('0xf0f2e3d505db37b67887a9edbdc6a6a61b73df30');
 web3.eth.defaultAccount = '0xf88e609aac9ad4039cddfab35fbf3fd750430097';
 
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
 app.get('/accounts/:account/slots', (req, res) => {
     theContract.getSlotsNumber((error, response) => {
         if (error) throw error;
@@ -45,7 +51,7 @@ app.get('/accounts/:account/provideSlot', (req, res) => {
     });
 });
 
-app.get('accounts/:account/reservateSlot', (req, resp) => {
+app.get('/accounts/:account/reservateSlot', (req, resp) => {
     theContract.reservateSlot(+req.query.slotId,
     +req.query.durationInMinutes,
     { gas:4000000 }
