@@ -13,7 +13,7 @@ contract parking {
 
     }
 
-    function hasAccess(uint32 slotId, address address) constant returns (bool access) {
+    function hasAccess(uint32 slotId, address addr) constant returns (bool access) {
 
     }
 
