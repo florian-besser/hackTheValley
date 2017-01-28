@@ -1,0 +1,14 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      About
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <div *ngFor="let device of devices" (click)="onClick()" style="margin: 20px">
+    <p>Name = {{ device.name }}</p>
+    <p> ID = {{ device.id }} </p>
+  </div>
+</ion-content>
