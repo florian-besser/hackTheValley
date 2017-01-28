@@ -66,7 +66,13 @@ contract parking {
     }
 
     function hasAccess(uint32 slotId, address addr) constant returns (bool access) {
-        access = reservatedSlotsByDriverAddr[addr].slotId == slotId;
+        uint256 from = reservatedSlotsByDriverAddr[addr].from;
+        uint32 durationInSeconds = reservatedSlotsByDriverAddr[addr].durationInMinutes * 60;
+        if (from + durationInSeconds >= block.timestamp) {
+            access = reservatedSlotsByDriverAddr[addr].slotId == slotId;
+        } else {
+            access = false; //Timed out
+        }
     }
 
     function reservateSlot(uint32 slotId, uint32 durationInMinutes) payable returns (bool success) {
