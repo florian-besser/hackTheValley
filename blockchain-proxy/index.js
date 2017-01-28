@@ -45,6 +45,16 @@ app.get('/accounts/:account/provideSlot', (req, res) => {
     });
 });
 
+app.get('accounts/:account/reservateSlot', (req, resp) => {
+    theContract.reservateSlot(+req.query.slotId,
+    +req.query.durationInMinutes,
+    { gas:4000000 }
+    ,(error, response) => {
+        if (error) throw error;
+        res.send(response);
+    });
+});
+
 app.listen(8088, (error) => {
     if (error) throw error;
 

@@ -1,4 +1,5 @@
 #include <SoftwareSerial.h>
+#include <Servo.h>
 
 // TX-O pin of bluetooth mate, Arduino A0
 #define bluetoothTxPin A0  
@@ -6,6 +7,9 @@
 #define bluetoothRxPin A1  
 
 SoftwareSerial bluetooth(bluetoothTxPin, bluetoothRxPin);
+
+Servo gate;
+int pos;
 
 void setup() {
   // Init traffic lights
@@ -26,6 +30,9 @@ void setup() {
   sendBluetoothInitCommand("AT+NAMEBLEGate");
   
   Serial.println("Bluetooth setup done.");
+
+  gate.attach(7);
+  closeGate();
 }
 
 void loop() {
@@ -33,28 +40,46 @@ void loop() {
     Serial.println("Bluetooth data available");
     while(bluetooth.available()) {
       String command = bluetooth.readStringUntil(';');
-      Serial.print("Command: ");
-      Serial.println(command);
       if(command.startsWith("OPEN")) {
         openGate();
         delay(5000);
         closeGate();
-      } else if(command.startsWith("CLOSE")) {
-        closeGate();
       }
+      Serial.println("Command: ");
+      Serial.println(command);
+    }
+  }
+  while(Serial.available()) {
+    String input = Serial.readString();
+    if(input.startsWith("OPEN")) {
+      openGate();
+      delay(5000);
+      closeGate();
+    } else if(input.startsWith("CLOSE")) {
+      closeGate();
     }
   }
 }
 
 void openGate() {
+  for (pos = 0; pos <= 90; pos++) {
+    gate.write(pos);
+    delay(15);
+  }
   digitalWrite(8, LOW);
   digitalWrite(9, HIGH);
+  
 }
 
 void closeGate() {
   digitalWrite(8, HIGH);
   digitalWrite(9, LOW);
+  for (pos = 90; pos >= 0; pos --) {
+    gate.write(pos);
+    delay(15);
+  }
 }
+
 
 void sendBluetoothInitCommand(String command) {
   bluetooth.print(command);
