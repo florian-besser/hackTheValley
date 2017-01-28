@@ -42,6 +42,7 @@ contract Parking {
         success = true;
     }
 
+    //TODO: only the OWNER should be able to delete a slot!
     function deleteSlot(uint32 slotId) returns (bool success) {
         delete providedSlotsBySlotId[slotId].owner;
         delete providedSlotsBySlotId[slotId].slotId;
@@ -92,6 +93,7 @@ contract Parking {
         }
     }
 
+    //TODO: Verify that enough ETHER was submitted for the entire duration (durationInMinutes * providedSlotsBySlotId[slotId].pricePerMinute)
     function reservateSlot(uint32 slotId, uint32 durationInMinutes) payable returns (bool success) {
         if(!providedSlotsBySlotId[slotId].available){
             return false;
