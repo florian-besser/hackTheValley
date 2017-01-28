@@ -22,14 +22,14 @@ contract parking {
      }
 
      mapping (uint32 => ProvidedSlot) providedSlotsBySlotId;
-     mapping (address => ReservatedSlot) reservatedSlotsByUserAddr;
+     mapping (address => ReservatedSlot) reservatedSlotsByDriverAddr;
 
      uint32[] slotIds;
 
     function provideSlot(uint32 slotId, uint32 pricePerMinute, string descr, uint32 xCoord, uint32 yCoord) returns (bool success) {
         providedSlotsBySlotId[slotId] = ProvidedSlot(msg.sender, slotId, pricePerMinute, descr, xCoord, yCoord, true, slotIds.length);
-        slotIds[slotIds.length] = slotId;
         slotIds.length++;
+        slotIds[slotIds.length - 1] = slotId;
 
         success = true;
     }
@@ -66,7 +66,7 @@ contract parking {
     }
 
     function hasAccess(uint32 slotId, address addr) constant returns (bool access) {
-        access = reservatedSlotsByUserAddr[addr].slotId == slotId;
+        access = reservatedSlotsByDriverAddr[addr].slotId == slotId;
     }
 
     function bookSlot(uint32 slotId, uint32 durationInMinutes) payable returns (bool success) {
@@ -76,10 +76,10 @@ contract parking {
     
         providedSlotsBySlotId[slotId].available = false; //flag it as reservated
 
-        reservatedSlotsByUserAddr[msg.sender].driver = msg.sender;
-        reservatedSlotsByUserAddr[msg.sender].slotId = slotId;
-        reservatedSlotsByUserAddr[msg.sender].from = block.timestamp;
-        reservatedSlotsByUserAddr[msg.sender].durationInMinutes = durationInMinutes;
+        reservatedSlotsByDriverAddr[msg.sender].driver = msg.sender;
+        reservatedSlotsByDriverAddr[msg.sender].slotId = slotId;
+        reservatedSlotsByDriverAddr[msg.sender].from = block.timestamp;
+        reservatedSlotsByDriverAddr[msg.sender].durationInMinutes = durationInMinutes;
         
         return true;
     }
@@ -88,10 +88,10 @@ contract parking {
     function cleanUpReservation(uint32 slotId) returns (bool success){
         providedSlotsBySlotId[slotId].available = true; //flag it as reservated
 
-        delete reservatedSlotsByUserAddr[msg.sender].driver;
-        delete reservatedSlotsByUserAddr[msg.sender].slotId;
-        delete reservatedSlotsByUserAddr[msg.sender].from;
-        delete reservatedSlotsByUserAddr[msg.sender].durationInMinutes;
+        delete reservatedSlotsByDriverAddr[msg.sender].driver;
+        delete reservatedSlotsByDriverAddr[msg.sender].slotId;
+        delete reservatedSlotsByDriverAddr[msg.sender].from;
+        delete reservatedSlotsByDriverAddr[msg.sender].durationInMinutes;
         
     }
 }
