@@ -24,7 +24,8 @@ app.get('/accounts/:account/slots', (req, res) => {
                 descr: slot[2],
                 xCoord: slot[3],
                 yCoord: slot[4],
-                available: slot[5]
+                available: slot[5],
+                bluetoothName: slot[6]
             });
         }
 
@@ -38,6 +39,7 @@ app.get('/accounts/:account/provideSlot', (req, res) => {
         req.query.descr,
         +req.query.xCoord,
         +req.query.yCoord,
+        +req.query.bluetoothName,
          { gas:4000000 }
     , (error, response) => {
         if (error) throw error;
