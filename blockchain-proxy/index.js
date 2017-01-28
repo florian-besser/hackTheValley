@@ -16,6 +16,10 @@ app.use(function(req, res, next) {
   next();
 });
 
+app.get('/accounts/defaultAccount', (req, res) => {
+    res.send(web3.eth.defaultAccount);
+});
+
 app.get('/accounts/:account/slots', (req, res) => {
     theContract.getSlotsNumber((error, response) => {
         if (error) throw error;

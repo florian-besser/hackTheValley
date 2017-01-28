@@ -6,10 +6,14 @@ import { Config } from '../config/config';
 
 @Injectable()
 export class HttpClient {
-  private baseUrl: string;
+  baseUrl: string;
 
   constructor(public http: Http) {
-    this.baseUrl = 'http://localhost:8088';
+    this.baseUrl = 'http://192.168.1.110:8088';
+  }
+
+  setBaseUrl(url: string) {
+    this.baseUrl = url;
   }
 
   get<T>(relativeUrl: string): Promise<T> {
