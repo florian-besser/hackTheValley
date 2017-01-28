@@ -7,7 +7,7 @@ var app = express();
 
 web3.setProvider(new web3.providers.HttpProvider('http://localhost:8545/'));
 var contract = web3.eth.contract(contractAbi);
-var theContract = contract.at('0xf0f2e3d505db37b67887a9edbdc6a6a61b73df30');
+var theContract = contract.at('0x15fba6f6a793353c5f65e08ef5722b05fe72c2b4');
 web3.eth.defaultAccount = '0xf88e609aac9ad4039cddfab35fbf3fd750430097';
 
 app.use(function(req, res, next) {
@@ -30,7 +30,8 @@ app.get('/accounts/:account/slots', (req, res) => {
                 descr: slot[2],
                 xCoord: slot[3],
                 yCoord: slot[4],
-                available: slot[5]
+                available: slot[5],
+                bluetoothName: slot[6]
             });
         }
 
@@ -44,6 +45,7 @@ app.get('/accounts/:account/provideSlot', (req, res) => {
         req.query.descr,
         +req.query.xCoord,
         +req.query.yCoord,
+        +req.query.bluetoothName,
          { gas:4000000 }
     , (error, response) => {
         if (error) throw error;

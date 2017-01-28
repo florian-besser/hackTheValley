@@ -1,7 +1,7 @@
 pragma solidity ^0.4.4;
 contract Parking {
 
-     struct ProvidedSlot
+    struct ProvidedSlot
      {
         address owner;
         uint32 slotId;
@@ -32,6 +32,9 @@ contract Parking {
     }
 
     function provideSlot(uint32 slotId, uint32 pricePerMinute, string descr, uint32 xCoord, uint32 yCoord, string bluetoothName) returns (bool success) {
+        if (providedSlotsBySlotId[slotId].owner != 0x0) {
+            throw;
+        }
         providedSlotsBySlotId[slotId] = ProvidedSlot(msg.sender, slotId, pricePerMinute, descr, xCoord, yCoord, true, bluetoothName, slotIds.length);
         slotIds.length++;
         slotIds[slotIds.length - 1] = slotId;
@@ -39,6 +42,7 @@ contract Parking {
         success = true;
     }
 
+    //TODO: only the OWNER should be able to delete a slot!
     function deleteSlot(uint32 slotId) returns (bool success) {
         delete providedSlotsBySlotId[slotId].owner;
         delete providedSlotsBySlotId[slotId].slotId;
@@ -78,7 +82,7 @@ contract Parking {
         available = providedSlotsBySlotId[slotId].available;
         bluetoothName = providedSlotsBySlotId[slotId].bluetoothName;        
     }
-
+ a
     function hasAccess(uint32 slotId, address addr) constant returns (bool access) {
         uint256 from = reservatedSlotsByDriverAddr[addr].from;
         uint32 durationInSeconds = reservatedSlotsByDriverAddr[addr].durationInMinutes * 60;
@@ -93,8 +97,14 @@ contract Parking {
         if(!providedSlotsBySlotId[slotId].available){
             return false;
         }
+
+        ProvidedSlot ps = providedSlotsBySlotId[slotId];
     
-        providedSlotsBySlotId[slotId].available = false; //flag it as reservated
+        if (msg.value < durationInMinutes * ps.pricePerMinute) {
+            //TODO: Verify that enough ETHER was submitted for the entire duration
+            //return false;
+        }
+        ps.available = false; //flag it as reservated
 
         reservatedSlotsByDriverAddr[msg.sender].driver = msg.sender;
         reservatedSlotsByDriverAddr[msg.sender].slotId = slotId;
@@ -112,6 +122,5 @@ contract Parking {
         delete reservatedSlotsByDriverAddr[msg.sender].slotId;
         delete reservatedSlotsByDriverAddr[msg.sender].from;
         delete reservatedSlotsByDriverAddr[msg.sender].durationInMinutes;
-        
     }
 }
