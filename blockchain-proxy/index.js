@@ -7,7 +7,7 @@ var app = express();
 
 web3.setProvider(new web3.providers.HttpProvider('http://localhost:8545/'));
 var contract = web3.eth.contract(contractAbi);
-var theContract = contract.at('0xf30bb0d3ade5ed1e6c301ced1716f9a647c0a3df');
+var theContract = contract.at('0x1fb63058d86fe37329112cc299daaa6e9f6e0eeb');
 web3.eth.defaultAccount = '0xf88e609aac9ad4039cddfab35fbf3fd750430097';
 
 app.get('/accounts/:account/slots', (req, res) => {
