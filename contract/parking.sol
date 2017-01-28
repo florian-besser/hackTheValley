@@ -10,6 +10,7 @@ contract Parking {
         uint32 xCoord;
         uint32 yCoord;
         bool available;
+        string bluetoothName;
         uint256 slotArrayIndex;
      }
 
@@ -30,8 +31,8 @@ contract Parking {
 
     }
 
-    function provideSlot(uint32 slotId, uint32 pricePerMinute, string descr, uint32 xCoord, uint32 yCoord) returns (bool success) {
-        providedSlotsBySlotId[slotId] = ProvidedSlot(msg.sender, slotId, pricePerMinute, descr, xCoord, yCoord, true, slotIds.length);
+    function provideSlot(uint32 slotId, uint32 pricePerMinute, string descr, uint32 xCoord, uint32 yCoord, string bluetoothName) returns (bool success) {
+        providedSlotsBySlotId[slotId] = ProvidedSlot(msg.sender, slotId, pricePerMinute, descr, xCoord, yCoord, true, bluetoothName, slotIds.length);
         slotIds.length++;
         slotIds[slotIds.length - 1] = slotId;
 
@@ -46,6 +47,7 @@ contract Parking {
         delete providedSlotsBySlotId[slotId].xCoord;
         delete providedSlotsBySlotId[slotId].yCoord;
         delete providedSlotsBySlotId[slotId].available;
+        delete providedSlotsBySlotId[slotId].bluetoothName;
 
         //Hack: 
         uint256 index = providedSlotsBySlotId[slotId].slotArrayIndex;
@@ -66,7 +68,7 @@ contract Parking {
         slotNumber = slotIds.length;
     } 
 
-    function getEntry(uint32 slotNumber) constant returns (uint32 slotId, uint32 pricePerMinute, string descr, uint32 xCoord, uint32 yCoord, bool available) {
+    function getEntry(uint32 slotNumber) constant returns (uint32 slotId, uint32 pricePerMinute, string descr, uint32 xCoord, uint32 yCoord, bool available, string bluetoothName) {
         slotId = slotIds[slotNumber];
 
         pricePerMinute = providedSlotsBySlotId[slotId].pricePerMinute;
@@ -74,6 +76,7 @@ contract Parking {
         xCoord = providedSlotsBySlotId[slotId].xCoord;
         yCoord = providedSlotsBySlotId[slotId].yCoord;
         available = providedSlotsBySlotId[slotId].available;
+        bluetoothName = providedSlotsBySlotId[slotId].bluetoothName;        
     }
 
     function hasAccess(uint32 slotId, address addr) constant returns (bool access) {

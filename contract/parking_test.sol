@@ -22,16 +22,19 @@ contract ParkingTest is Test {
     }
 
     function testProvideSlotOneSlot() logs_gas() {
-        parking.provideSlot(1, 123, "desc", 0, 0);
+        parking.provideSlot(1, 123, "desc", 0, 0, "b.uetoothName");
         assertEq( parking.getSlotsNumber(), 1);
+        
     }
 
     function testDeleteSlotNoMoreSlotsPresent() logs_gas() {
-        parking.provideSlot(1, 123, "desc", 0, 0);
-        parking.provideSlot(2, 123, "desc", 0, 0);
+        parking.provideSlot(1, 123, "desc", 0, 0, "btn");
+        parking.provideSlot(2, 123, "desc", 0, 0, "btn");
         parking.deleteSlot(1);
         assertEq( parking.getSlotsNumber(), 1);
         parking.deleteSlot(2);
         assertEq( parking.getSlotsNumber(), 0);
     }
+
+
 }
