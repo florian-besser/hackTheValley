@@ -1,7 +1,7 @@
 pragma solidity ^0.4.4;
 contract Parking {
 
-     struct ProvidedSlot
+    struct ProvidedSlot
      {
         address owner;
         uint32 slotId;
@@ -112,6 +112,5 @@ contract Parking {
         delete reservatedSlotsByDriverAddr[msg.sender].slotId;
         delete reservatedSlotsByDriverAddr[msg.sender].from;
         delete reservatedSlotsByDriverAddr[msg.sender].durationInMinutes;
-        
     }
 }

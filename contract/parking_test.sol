@@ -22,9 +22,14 @@ contract ParkingTest is Test {
     }
 
     function testProvideSlotOneSlot() logs_gas() {
-        parking.provideSlot(1, 123, "desc", 0, 0, "b.uetoothName");
+        parking.provideSlot(1, 123, "desc", 0, 0, "bluetoothName");
         assertEq( parking.getSlotsNumber(), 1);
-        
+        var ( slotId, pricePerMinute, descr, xCoord, yCoord, available, bluetoothName ) = parking.getEntry(0);
+        assertEq( slotId, uint(1));
+        assertEq( pricePerMinute, uint(123));
+        assertEq( xCoord, uint(0));
+        assertEq( yCoord, uint(0));
+        assertEq( available, bool(true));
     }
 
     function testDeleteSlotNoMoreSlotsPresent() logs_gas() {
@@ -36,5 +41,15 @@ contract ParkingTest is Test {
         assertEq( parking.getSlotsNumber(), 0);
     }
 
+    function testNoAccess() logs_gas() {
+        parking.provideSlot(1, 123, "desc", 0, 0, "bluetoothName");
+        assertEq( parking.hasAccess(1, 0x123), false);
+    }
 
+    function testReserveSlotAccess() logs_gas() {
+        parking.provideSlot(1, 123, "desc", 0, 0, "bluetoothName");
+        parking.reservateSlot(1, 60);
+        assertEq( parking.hasAccess(1, 0x123), false);
+        assertEq( parking.hasAccess(1, address(this)), true);
+    }
 }
