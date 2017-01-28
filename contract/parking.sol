@@ -32,6 +32,9 @@ contract Parking {
     }
 
     function provideSlot(uint32 slotId, uint32 pricePerMinute, string descr, uint32 xCoord, uint32 yCoord, string bluetoothName) returns (bool success) {
+        if (providedSlotsBySlotId[slotId].owner != 0x0) {
+            throw;
+        }
         providedSlotsBySlotId[slotId] = ProvidedSlot(msg.sender, slotId, pricePerMinute, descr, xCoord, yCoord, true, bluetoothName, slotIds.length);
         slotIds.length++;
         slotIds[slotIds.length - 1] = slotId;

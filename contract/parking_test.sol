@@ -32,6 +32,11 @@ contract ParkingTest is Test {
         assertEq( available, bool(true));
     }
 
+    function testFailProvideSlotWithSameIdTwice() logs_gas() {
+        parking.provideSlot(1, 123, "desc", 0, 0, "bluetoothName");
+        parking.provideSlot(1, 234, "otherDesc", 1, 1, "bluetoothName2");        
+    }
+
     function testDeleteSlotNoMoreSlotsPresent() logs_gas() {
         parking.provideSlot(1, 123, "desc", 0, 0, "btn");
         parking.provideSlot(2, 123, "desc", 0, 0, "btn");
