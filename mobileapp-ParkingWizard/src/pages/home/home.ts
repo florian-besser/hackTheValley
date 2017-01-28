@@ -27,7 +27,7 @@ export class HomePage {
   }
 
   reservateSlot(slotId: number) {
-    this.blockchain.reservateSlot(slotId);
+    this.blockchain.reservateSlot(slotId, 100);
   }
 
   isGatePresent(name: string){

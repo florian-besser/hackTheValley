@@ -9,11 +9,15 @@ export class HttpClient {
   private baseUrl: string;
 
   constructor(public http: Http) {
-    this.baseUrl = 'http://192.168.1.110:8088';
+    this.baseUrl = 'http://localhost:8088';
   }
 
   get<T>(relativeUrl: string): Promise<T> {
     return this.http.get(this.baseUrl + relativeUrl).toPromise().then(v => v.json());
+  }
+
+  gett(relativeUrl: string) {
+    return this.http.get(this.baseUrl + relativeUrl).toPromise();
   }
 
   post<T>(relativeUrl: string, payload: any): Promise<T> {
