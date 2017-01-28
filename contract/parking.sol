@@ -69,7 +69,7 @@ contract parking {
         access = reservatedSlotsByDriverAddr[addr].slotId == slotId;
     }
 
-    function bookSlot(uint32 slotId, uint32 durationInMinutes) payable returns (bool success) {
+    function reservateSlot(uint32 slotId, uint32 durationInMinutes) payable returns (bool success) {
         if(!providedSlotsBySlotId[slotId].available){
             return false;
         }
