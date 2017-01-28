@@ -1,29 +1,31 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
+import { HttpClient } from './http-client';
 
 export class ParkingSpaceInfo {
-  id: string;
-  description: string;
+  slotId: string;
+  pricePerMinute: number;
+  descr: string;
+  xCoord: number;
+  yCoord: number;
+  available: boolean;
+  bluetoothName: string;
 }
 
 @Injectable()
 export class Blockchain {
 
-  constructor(public http: Http) {
+  address = '0xf88e609aac9ad4039cddfab35fbf3fd750430097';
+
+  constructor(public client: HttpClient) {  
   }
 
   getParkingSpaces(): Promise<ParkingSpaceInfo[]> {
-    const parkingSpace1 = new ParkingSpaceInfo();
-    parkingSpace1.id = '0x34384398448';
-    parkingSpace1.description = 'Very central spot';    
-    const parkingSpace2 = new ParkingSpaceInfo();
-    parkingSpace2.id = '0x34384328448';
-    parkingSpace2.description = 'Luxury parking';    
+    return this.client.get<ParkingSpaceInfo[]>(`/accounts/${this.address}/slots`);
+  }
 
-    return Promise.resolve([
-      parkingSpace1, parkingSpace2
-    ]);
+  reservateSlot(slotId: number) {
+    this.client.get(`/accounts/${this.address}/reservateSlot?slotId=${slotId}`);
   }
 
 }

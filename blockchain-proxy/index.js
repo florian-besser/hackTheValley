@@ -19,6 +19,7 @@ app.use(function(req, res, next) {
 app.get('/accounts/:account/slots', (req, res) => {
     theContract.getSlotsNumber((error, response) => {
         if (error) throw error;
+        console.log(+response);
 
         var slots = [];
 
