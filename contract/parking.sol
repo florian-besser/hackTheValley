@@ -81,7 +81,7 @@ contract Parking {
         available = providedSlotsBySlotId[slotId].available;
         bluetoothName = providedSlotsBySlotId[slotId].bluetoothName;        
     }
-
+ a
     function hasAccess(uint32 slotId, address addr) constant returns (bool access) {
         uint256 from = reservatedSlotsByDriverAddr[addr].from;
         uint32 durationInSeconds = reservatedSlotsByDriverAddr[addr].durationInMinutes * 60;
