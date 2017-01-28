@@ -49,10 +49,17 @@ contract Parking {
 
         //Hack: 
         uint256 index = providedSlotsBySlotId[slotId].slotArrayIndex;
-        slotIds[index] = slotIds[slotIds.length - 1];
-        slotIds.length--;
+        if (index == slotIds.length - 1) {
+            //Delete last index, simply drop last part of array
+            slotIds.length--;
+        } else {
+            //Deleting something inside the array, move the last element to the location to be deleted, then drop the last element
+            slotIds[index] = slotIds[slotIds.length - 1];
+            slotIds.length--;
 
-        providedSlotsBySlotId[slotIds[index]].slotArrayIndex = index;
+            uint32 slotIdMoved = slotIds[index];
+            providedSlotsBySlotId[slotIdMoved].slotArrayIndex = index;
+        }
     }
 
     function getSlotsNumber() constant returns (uint256 slotNumber) {

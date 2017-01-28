@@ -26,4 +26,12 @@ contract ParkingTest is Test {
         assertEq( parking.getSlotsNumber(), 1);
     }
 
+    function testDeleteSlotNoMoreSlotsPresent() logs_gas() {
+        parking.provideSlot(1, 123, "desc", 0, 0);
+        parking.provideSlot(2, 123, "desc", 0, 0);
+        parking.deleteSlot(1);
+        assertEq( parking.getSlotsNumber(), 1);
+        parking.deleteSlot(2);
+        assertEq( parking.getSlotsNumber(), 0);
+    }
 }
