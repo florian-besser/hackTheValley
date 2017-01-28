@@ -37,6 +37,8 @@ void loop() {
       Serial.println(command);
       if(command.startsWith("OPEN")) {
         openGate();
+        delay(5000);
+        closeGate();
       } else if(command.startsWith("CLOSE")) {
         closeGate();
       }
