@@ -47,6 +47,7 @@ var msgHash = web3.sha3(msg);
 
 //var sig = web3.personal.sign(msgHash, web3.eth.defaultAccount);
 var sig = web3.eth.sign(web3.eth.defaultAccount, msgHash);
+//var sig = web3.currentProvider.sign(msgHash, web3.eth.defaultAccount, "zuehlke")
 
 Send sig over the net.
 
