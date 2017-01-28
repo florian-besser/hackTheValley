@@ -8,6 +8,12 @@
 SoftwareSerial bluetooth(bluetoothTxPin, bluetoothRxPin);
 
 void setup() {
+  // Init traffic lights
+  pinMode(8, OUTPUT);
+  pinMode(9, OUTPUT);
+  digitalWrite(8, LOW);
+  digitalWrite(9, LOW);
+  
   Serial.begin(9600); //init serial port and set baudrate
   while(!Serial); //wait for serial port to connect (needed for Leonardo only)
   Serial.println("\nStart...");
@@ -23,7 +29,29 @@ void setup() {
 }
 
 void loop() {
-  
+  if(bluetooth.available()) {
+    Serial.println("Bluetooth data available");
+    while(bluetooth.available()) {
+      String command = bluetooth.readStringUntil(';');
+      Serial.print("Command: ");
+      Serial.println(command);
+      if(command.startsWith("OPEN")) {
+        openGate();
+      } else if(command.startsWith("CLOSE")) {
+        closeGate();
+      }
+    }
+  }
+}
+
+void openGate() {
+  digitalWrite(8, LOW);
+  digitalWrite(9, HIGH);
+}
+
+void closeGate() {
+  digitalWrite(8, HIGH);
+  digitalWrite(9, LOW);
 }
 
 void sendBluetoothInitCommand(String command) {
