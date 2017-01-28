@@ -54,7 +54,7 @@ app.get('/accounts/:account/provideSlot', (req, res) => {
     });
 });
 
-app.get('/accounts/:account/reservateSlot', (req, resp) => {
+app.get('/accounts/:account/reservateSlot', (req, res) => {
     theContract.reservateSlot(+req.query.slotId,
     +req.query.durationInMinutes,
     { gas:4000000 }

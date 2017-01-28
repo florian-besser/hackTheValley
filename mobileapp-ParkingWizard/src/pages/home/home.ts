@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, Platform } from 'ionic-angular';
 import { Blockchain, ParkingSpaceInfo } from '../../providers/blockchain';
 import { BLE } from 'ionic-native';
 
@@ -16,17 +16,18 @@ export class HomePage {
   service: string = "";
   characteristic: string = "";
 
-  constructor(public navCtrl: NavController, private blockchain: Blockchain) {
+  constructor(private platform: Platform, public navCtrl: NavController, private blockchain: Blockchain) {
 
   }
 
   ionViewDidEnter() {
     this.blockchain.getParkingSpaces().then(s => this.parkingSpaces = s);
-    this.browseForGates();
+    
+    this.platform.ready().then(() => this.browseForGates());
   }
 
   reservateSlot(slotId: number) {
-    this.blockchain.reservateSlot(slotId);
+    this.blockchain.reservateSlot(slotId, 100);
   }
 
   isGatePresent(name: string){
@@ -63,7 +64,7 @@ export class HomePage {
             console.log("stopScan failed");
           }
         );
-    }).catch(() => alert("Bluetooth is *not* enabled"));
+    }).catch(error => alert("Bluetooth is *not* enabled. " + error));
   }
 
   connect(device) {

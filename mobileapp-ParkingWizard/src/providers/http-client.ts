@@ -16,6 +16,10 @@ export class HttpClient {
     return this.http.get(this.baseUrl + relativeUrl).toPromise().then(v => v.json());
   }
 
+  gett(relativeUrl: string) {
+    return this.http.get(this.baseUrl + relativeUrl).toPromise();
+  }
+
   post<T>(relativeUrl: string, payload: any): Promise<T> {
     return this.http.post(this.baseUrl + relativeUrl, payload).toPromise().then(v => v.json());
   }

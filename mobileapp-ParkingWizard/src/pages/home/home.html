@@ -8,9 +8,11 @@
   <h2>Available Parking Spaces</h2>
   <ion-list>
     <ion-item *ngFor="let parkingSpace of parkingSpaces">
-      {{ parkingSpace.descr }}
-      <button *ngIf="parkingSpace.available" (click)="reservateSlot(parkingSpace.slotId)">book</button>
-      <button *ngIf="isGatePresent(parkingSpace.bluetoothName)" (click)="openGate()">open gate</button>
+      <ion-grid><ion-row>
+      <ion-col> {{ parkingSpace.descr }}</ion-col>
+      <ion-col><button small ion-button *ngIf="parkingSpace.available" (click)="reservateSlot(parkingSpace.slotId)">book</button></ion-col>
+      <ion-col><button small ion-button *ngIf="isGatePresent(parkingSpace.bluetoothName)" (click)="openGate()">open gate</button></ion-col>
+      </ion-row></ion-grid>
     </ion-item>
   </ion-list>
 </ion-content>

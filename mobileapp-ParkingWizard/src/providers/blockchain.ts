@@ -24,8 +24,8 @@ export class Blockchain {
     return this.client.get<ParkingSpaceInfo[]>(`/accounts/${this.address}/slots`);
   }
 
-  reservateSlot(slotId: number) {
-    this.client.get(`/accounts/${this.address}/reservateSlot?slotId=${slotId}`);
+  reservateSlot(slotId: number, duration: number) {
+    this.client.gett(`/accounts/${this.address}/reservateSlot?slotId=${slotId}&durationInMinutes=${duration}`);
   }
 
 }
