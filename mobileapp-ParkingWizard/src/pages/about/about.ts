@@ -41,7 +41,7 @@ export class AboutPage {
   onClick(device) {
     if(this.connected) {
       BLE
-        .writeWithoutResponse(this.deviceId, this.service, this.characteristic, stringToBytes("OPEN;"))
+        .writeWithoutResponse(this.deviceId, this.service, this.characteristic, stringToBytes("0x8c99ca0e55ec2f35ad18e9e7a20883ad1ffe859e;"))
         .catch((error) => alert("write error: " + error));
     } else {
       alert("Not connected");

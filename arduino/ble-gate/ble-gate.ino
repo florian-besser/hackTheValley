@@ -31,7 +31,7 @@ void setup() {
   
   Serial.println("Bluetooth setup done.");
 
-  gate.attach(7);
+  gate.attach(12);
   closeGate();
 }
 
@@ -40,13 +40,10 @@ void loop() {
     Serial.println("Bluetooth data available");
     while(bluetooth.available()) {
       String command = bluetooth.readStringUntil(';');
-      if(command.startsWith("OPEN")) {
-        openGate();
-        delay(5000);
-        closeGate();
+      if(!command.startsWith("OK")) {
+        Serial.println("Command: ");
+        Serial.println(command);
       }
-      Serial.println("Command: ");
-      Serial.println(command);
     }
   }
   while(Serial.available()) {

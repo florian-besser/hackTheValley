@@ -82,15 +82,17 @@ contract Parking {
         available = providedSlotsBySlotId[slotId].available;
         bluetoothName = providedSlotsBySlotId[slotId].bluetoothName;        
     }
- a
+ 
     function hasAccess(uint32 slotId, address addr) constant returns (bool access) {
         uint256 from = reservatedSlotsByDriverAddr[addr].from;
         uint32 durationInSeconds = reservatedSlotsByDriverAddr[addr].durationInMinutes * 60;
-        if (from + durationInSeconds >= block.timestamp) {
-            access = reservatedSlotsByDriverAddr[addr].slotId == slotId;
-        } else {
-            access = false; //Timed out
-        }
+       // if (from + durationInSeconds >= block.timestamp) {
+       //     access = reservatedSlotsByDriverAddr[addr].slotId == slotId;
+       // } else {
+       //     access = false; //Timed out
+       // }
+
+        access = reservatedSlotsByDriverAddr[addr].slotId == slotId;
     }
 
     function reservateSlot(uint32 slotId, uint32 durationInMinutes) payable returns (bool success) {
