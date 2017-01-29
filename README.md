@@ -5,14 +5,37 @@ Hack The Valley 2017
 
 ![alt text](https://github.com/florian-besser/hackTheValley/blob/master/IMG_0322.JPG "Overview")
 
-
 # How to use this repo
 
 ## The smart contract
 
+The smart contract is registered once, globally. It can be found at the address **0x1fb63058d86fe37329112cc299daaa6e9f6e0eeb** on the norsborg test net.
+
+If you wish to look at the source, you can find it in the *contract* folder.
+
+If you want to deploy your own contract, have a look at the **For Developers** section below.
+
 ## Arduino / Geth Barrier
 
+The arduino control (on the same device running geth) can be found in *arduino/control.py*.
+
+The low-level arduino code to be run on the arduino itself can be found in *arduino/ble-gate/ble-gate.ino*
+
+The Arduino will listen for incoming data via Bluetooth. The data sent should be the address of the driver which previously reservated a parking slot. 
+
+It will send this data to the control component, which will verify whether the address truly reserved the slot.
+
+The copntrol component will then send back the command to open the gate or not.
+
 ## Driver App
+
+An Ionic app for your viewing pleasure.
+
+Download the **Ionic View** App from the App Store (Android & iPhone currently). Create an account in the App and then enter **9e8710c8** as App Id.
+
+You must first confirm the IP and port for your corresponding NodeJs server. The NodeJS server must be set up so that it can communicate with a Geth node.
+
+Then switch over to the **Find Parking** tab and you'll see parking spaces fetched from the Blockchain. Select which parking slot you want and follow the GUI.
 
 # For Developers
 
