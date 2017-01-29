@@ -1,40 +1,69 @@
 # hackTheValley
 Hack The Valley 2017
 
-# Useful general commands
+# System Overview / Big Picture
+
+TODO
+
+# How to use this repo
+
+## The smart contract
+
+## Arduino / Geth Barrier
+
+## Driver App
+
+# For Developers
+
+## The Geth CLI
+
+### Useful general commands
 
 Disable log output for geth:
+```
 debug.verbosity(1)
+```
 
-# Generating / unlocking accounts
-personal.newAccount("zuehlke");
+### Generating / unlocking accounts
+```
+personal.newAccount("<password>");
 
 web3.eth.defaultAccount = eth.accounts[1];
 
-web3.personal.unlockAccount(eth.accounts[1], "zuehlke", 1000);
+web3.personal.unlockAccount(eth.accounts[1], "<password>", 1000);
+```
+### Deploying the smart contract
 
-# Deploying a contract
+Copy the entire contract in *contract/parking.sol* into [Browser Solidity](https://ethereum.github.io/browser-solidity/#version=soljson-v0.4.8+commit.60cc1668.js)
 
-Copy the entire contract in contract/parking.sol into https://ethereum.github.io/browser-solidity/#version=soljson-v0.4.8+commit.60cc1668.js
+Copy the output in the text area marked **Web3 deploy** into Geth
 
-Copy the output in the text area marked "Web3 deploy" into Geth
+Alternatively, you can compile the contract in *contract/parking.sol*, or use the compilation output from the bin folder.
 
-# Loading a contract 
+### Loading a contract 
 
-Uses the same variable "parkingContract" which was defined in the section above.
+Copy the entire contract in *contract/parking.sol* into [Browser Solidity](https://ethereum.github.io/browser-solidity/#version=soljson-v0.4.8+commit.60cc1668.js)
 
-var theContract = parkingContract.at('0x3f450821dde5a19cc5b61340ad1944a37d515363');
-
-# Working on a contract
-
+Copy the variable **parkingContract** in the text area marked **Web3 deploy** into Geth.
+```
+var theContract = parkingContract.at('<address>');
+```
+### Working on a contract
+Providing a new parking slot (*1337* being the unique **slot id**):
+```
 theContract.provideSlot(1337, 0, "ArduinoTest", 123, 456, "bluetoothName", {gas:4000000});
-
-//My Account: "0x4936c7d5785d9189a5d1af838c3fadcd0db1da3c"
-
-theContract.reservateSlot(1337, 10000);
-
+theContract.provideSlot(<slot id>, <price in wei per minute>, <description>, <xCoord>, <yCoord>, <name of the bluetooth device>, {gas:4000000});
+```
+Reservating a slot:
+```
+theContract.reservateSlot(1337, 10000, {gas:4000000, value:600});
+theContract.reservateSlot(<slot id>, <minutes>, {gas:4000000, value:<price in wei per minute>*<minutes>});
+```
+Checking if an address has access:
+```
 theContract.hasAccess(1337, "0x4936c7d5785d9189a5d1af838c3fadcd0db1da3c");
-
-# Debug transactions
+theContract.reservateSlot(<slot id>, <address>);
+```
+### Debug transactions
 
 eth.getTransactionReceipt("0xb0b202a37cc995d047ae7750f191979e39c05ddc53386e4d1a705bfd867003bf")
