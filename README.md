@@ -5,13 +5,25 @@ Hack The Valley 2017
 
 ![alt text](https://github.com/florian-besser/hackTheValley/blob/master/IMG_0322.JPG "Overview")
 
+Tim (on the left) has a parking space. Tim works as a software developer and lives in the heart of Zurich. Tim travels to work and visits his customers by car and his expensive parking space stays unused most of the time.
+
+John (on the right) needs a parking space. John lives in the countryside but has an important job interview in Zurich. John is really nervous because he knows that the traffic in Zurich is a hassle, but finding a free parking space seems improssible to him.
+
+Luckily there is Crypto Valley in Switzerland with lots of smart hackers who have smart ideas of how to grow the sharecononomy by using IoT and Blockchain technology. It seems they have a solution for Tim and John. Here is how it works.
+
+Tim is using a Dapp called "BlockPark" to offer his parking space to somebody who needs it. If somebody books his parking space, he even gets paid in one of those fancy new crypto currencies. How awesome is that!
+
+John is nervous as he has a job interview coming up today in Zurich and he doesn't know where to park yet. He books Tim's parking space.
+
+John can use his smart phone to control the barrier controlling access to the parking space once he arrives.
+
 # How to use this repo
 
 ## The smart contract
 
 The smart contract is registered once, globally. It can be found at the address **0x1fb63058d86fe37329112cc299daaa6e9f6e0eeb** on the norsborg test net.
 
-If you wish to look at the source, you can find it in the *contract* folder.
+If you wish to look at the source, you can find it in *contract/parking.sol*. Corresponding unit tests assuring you of the quality can be found in *cxontract/parking_test.sol*.
 
 If you want to deploy your own contract, have a look at the **For Developers** section below.
 
@@ -38,6 +50,17 @@ You must first confirm the IP and port for your corresponding NodeJs server. The
 Then switch over to the **Find Parking** tab and you'll see parking spaces fetched from the Blockchain. Select which parking slot you want and follow the GUI.
 
 # For Developers
+
+## Testing a smart contract
+
+Install dapple
+```
+sudo npm install -g dapple
+```
+Run dapple from the *contract* folder:
+```
+dapple test
+```
 
 ## The Geth CLI
 
