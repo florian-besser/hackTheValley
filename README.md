@@ -3,7 +3,7 @@ Hack The Valley 2017 BlockPark
 
 # System Overview / Big Picture
 
-![alt text](https://github.com/florian-besser/hackTheValley/blob/master/IMG_0322.JPG "Overview")
+![alt text](https://github.com/florian-besser/hackTheValley/blob/master/IMG_6249.JPG "Overview")
 
 Tim (on the left) has a parking space. Tim works as a software developer and lives in the heart of Zurich. Tim travels to work and visits his customers by car and his expensive parking space stays unused most of the time.
 
@@ -83,7 +83,7 @@ web3.personal.unlockAccount(eth.accounts[1], "<password>", 1000);
 
 Copy the entire contract in *contract/parking.sol* into [Browser Solidity](https://ethereum.github.io/browser-solidity/#version=soljson-v0.4.8+commit.60cc1668.js)
 
-Copy the output in the text area marked **Web3 deploy** into Geth
+Copy the output in the text area marked **Web3 deploy** into Geth, wait for the corresponding block to be mined.
 
 Alternatively, you can compile the contract in *contract/parking.sol*, or use the compilation output from the bin folder.
 
