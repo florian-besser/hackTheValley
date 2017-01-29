@@ -17,13 +17,14 @@ app.use(function(req, res, next) {
 });
 
 app.get('/accounts/defaultAccount', (req, res) => {
+    console.log('get default account address');
     res.send(web3.eth.defaultAccount);
 });
 
 app.get('/accounts/:account/slots', (req, res) => {
+    console.log('GET slots');
     theContract.getSlotsNumber((error, response) => {
-        if (error) throw error;
-        console.log(+response);
+        if (error) console.error(error);
 
         var slots = [];
 
@@ -45,6 +46,7 @@ app.get('/accounts/:account/slots', (req, res) => {
 });
 
 app.get('/accounts/:account/provideSlot', (req, res) => {
+    console.log('provide slots');
     theContract.provideSlot(+req.query.slotId,
         +req.query.pricePerMinute,
         req.query.descr,
@@ -53,23 +55,24 @@ app.get('/accounts/:account/provideSlot', (req, res) => {
         req.query.bluetoothName,
          { gas:4000000 }
     , (error, response) => {
-        if (error) throw error;
+        if (error) console.error(error);
         res.send(response);
     });
 });
 
 app.get('/accounts/:account/reservateSlot', (req, res) => {
+    console.log('reserve slot');
     theContract.reservateSlot(+req.query.slotId,
     +req.query.durationInMinutes,
     { gas:4000000 }
     ,(error, response) => {
-        if (error) throw error;
+        if (error) console.error(error);
         res.send(response);
     });
 });
 
 app.listen(8088, (error) => {
-    if (error) throw error;
+    if (error) console.error(error);
 
     console.log('Express webserver running on port 8088');
 });

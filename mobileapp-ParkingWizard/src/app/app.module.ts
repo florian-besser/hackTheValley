@@ -4,6 +4,7 @@ import { MyApp } from './app.component';
 import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
+import { ProvideSlotsPage } from '../pages/provide-slots/provide-slots';
 import { TabsPage } from '../pages/tabs/tabs';
 import { Blockchain } from '../providers/blockchain';
 import { HttpClient } from '../providers/http-client';
@@ -14,6 +15,7 @@ import { HttpClient } from '../providers/http-client';
     AboutPage,
     ContactPage,
     HomePage,
+    ProvideSlotsPage,
     TabsPage
   ],
   imports: [
@@ -25,6 +27,7 @@ import { HttpClient } from '../providers/http-client';
     AboutPage,
     ContactPage,
     HomePage,
+    ProvideSlotsPage,
     TabsPage
   ],
   providers: [
