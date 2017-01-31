@@ -29,7 +29,7 @@ If you want to deploy your own contract, have a look at the **For Developers** s
 
 ## Arduino / Geth Barrier
 
-The arduino control (on the same device running geth) can be found in *arduino/control.py*.
+The arduino control (on the same device running geth) can be found in *arduino/gateControl.py*.
 
 The low-level arduino code to be run on the arduino itself can be found in *arduino/ble-gate/ble-gate.ino*
 
