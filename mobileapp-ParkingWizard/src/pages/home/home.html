@@ -1,12 +1,18 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>BC ParkingWizard</ion-title>
+    <ion-title>Find Parking</ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content padding text-center>
   <h2>Available Parking Spaces</h2>
-  <ion-list>
+  <ion-list text-left>
+    <ion-grid>
+      <ion-row><ion-col>Daniel's Parking 42</ion-col></ion-row>
+      <ion-row><ion-col><button block ion-button (click)="reservateSlot(parkingSpace.slotId)">book</button></ion-col></ion-row>
+      <ion-row><ion-col><button block ion-button (click)="openGate()">open gate</button></ion-col></ion-row>
+    </ion-grid>
+
     <ion-item *ngFor="let parkingSpace of parkingSpaces">
       <ion-grid><ion-row>
       <ion-col> {{ parkingSpace.descr }} ({{ parkingSpace.slotId }})</ion-col></ion-row><ion-row>
