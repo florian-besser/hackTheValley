@@ -1,0 +1,44 @@
+<!--
+  Generated template for the ProvideSlots page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>ProvideSlots</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list>
+    <ion-item>
+      <ion-label>Slot ID</ion-label>
+      <ion-input type="number" [(ngModel)]="parkingSpaceInfo.slotId" name="SlotId"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Price per minute</ion-label>
+      <ion-input type="number" [(ngModel)]="parkingSpaceInfo.pricePerMinute" name="pricePerMinute"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Description</ion-label>
+      <ion-input type="text" [(ngModel)]="parkingSpaceInfo.descr" name="descr"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>X  coord</ion-label>
+      <ion-input type="number" [(ngModel)]="parkingSpaceInfo.xCoord" name="xCoord"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Y coord</ion-label>
+      <ion-input type="number" [(ngModel)]="parkingSpaceInfo.yCoord" name="yCoord"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Bluetooth name</ion-label>
+      <ion-input type="text" [(ngModel)]="parkingSpaceInfo.bluetoothName" name="bluetoothName"></ion-input>
+    </ion-item>
+  </ion-list>
+  <button ion-button (click)="provideSlot()">Register</button>
+</ion-content>
