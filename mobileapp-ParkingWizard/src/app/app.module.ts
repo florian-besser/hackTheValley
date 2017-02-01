@@ -1,10 +1,10 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
-import { AboutPage } from '../pages/about/about';
-import { ContactPage } from '../pages/contact/contact';
-import { HomePage } from '../pages/home/home';
+import { SettingsPage } from '../pages/settings/settings';
+import { FindPage } from '../pages/find/find';
 import { ProvideSlotsPage } from '../pages/provide-slots/provide-slots';
+import { OpenPage } from '../pages/open/open';
 import { TabsPage } from '../pages/tabs/tabs';
 import { Blockchain } from '../providers/blockchain';
 import { HttpClient } from '../providers/http-client';
@@ -12,10 +12,10 @@ import { HttpClient } from '../providers/http-client';
 @NgModule({
   declarations: [
     MyApp,
-    AboutPage,
-    ContactPage,
-    HomePage,
+    SettingsPage,
+    FindPage,
     ProvideSlotsPage,
+    OpenPage,
     TabsPage
   ],
   imports: [
@@ -24,10 +24,10 @@ import { HttpClient } from '../providers/http-client';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    AboutPage,
-    ContactPage,
-    HomePage,
+    SettingsPage,
+    FindPage,
     ProvideSlotsPage,
+    OpenPage,
     TabsPage
   ],
   providers: [

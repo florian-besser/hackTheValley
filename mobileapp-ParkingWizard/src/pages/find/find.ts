@@ -4,10 +4,10 @@ import { Blockchain, ParkingSpaceInfo } from '../../providers/blockchain';
 import { BLE } from 'ionic-native';
 
 @Component({
-  selector: 'page-home',
-  templateUrl: 'home.html'
+  selector: 'page-find',
+  templateUrl: 'find.html'
 })
-export class HomePage {
+export class FindPage {
 
   parkingSpaces: ParkingSpaceInfo[];
   conntectedToGate: boolean = false;

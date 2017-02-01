@@ -5,10 +5,10 @@ import { HttpClient } from '../../providers/http-client';
 import { Blockchain } from '../../providers/blockchain';
 
 @Component({
-  selector: 'page-contact',
-  templateUrl: 'contact.html'
+  selector: 'page-settings',
+  templateUrl: 'settings.html'
 })
-export class ContactPage {
+export class SettingsPage {
 
   url;
 
